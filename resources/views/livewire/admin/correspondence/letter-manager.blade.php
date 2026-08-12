@@ -63,9 +63,9 @@
 
     <!-- Modal Buat Surat Baru -->
     @if($showCreateModal)
-    <div class="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6">
+    <div class="fixed inset-0 z-50 flex justify-end">
         <div class="absolute inset-0 bg-slate-900/40 dark:bg-slate-950/80 backdrop-blur-sm" wire:click="$set('showCreateModal', false)"></div>
-        <div class="relative bg-white dark:bg-slate-900 rounded-3xl p-8 max-w-xl w-full border border-indigo-200 dark:border-indigo-500/40 shadow-2xl space-y-5 text-left max-h-[85vh] overflow-y-auto custom-scrollbar">
+        <div class="relative w-full md:w-3/4 lg:w-3/4 bg-white dark:bg-slate-900 shadow-2xl flex flex-col h-full animate-slide-in-right overflow-hidden border-l border-slate-200 dark:border-slate-800">
             <h3 class="font-heading font-black text-2xl text-slate-900 dark:text-white">Penerbitan Surat & Tata Naskah</h3>
             <p class="text-slate-500 dark:text-slate-400 text-xs">Penomeran surat otomatis menyesuaikan angka Romawi bulan dan tahun berjalan tanpa bentrok urutan.</p>
 

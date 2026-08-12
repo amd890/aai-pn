@@ -95,10 +95,10 @@
 
     <!-- Modal Form Menu -->
     @if($isModalOpen)
-    <div class="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
+    <div class="fixed inset-0 z-50 flex justify-end">
         <div class="absolute inset-0 bg-slate-900/50 dark:bg-slate-950/80 backdrop-blur-sm" wire:click="$set('isModalOpen', false)"></div>
         
-        <div class="relative w-full max-w-md p-6 overflow-hidden text-left bg-white dark:bg-slate-900 rounded-2xl shadow-xl max-h-[85vh] flex flex-col border border-slate-200 dark:border-slate-800">
+        <div class="relative w-full md:w-3/4 lg:w-3/4 bg-white dark:bg-slate-900 shadow-2xl flex flex-col h-full animate-slide-in-right overflow-hidden border-l border-slate-200 dark:border-slate-800">
                 
                 <form wire:submit.prevent="saveMenu">
                     <div class="px-6 py-5 bg-slate-50 dark:bg-slate-800/50 border-b border-slate-200 dark:border-slate-800">

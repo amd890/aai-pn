@@ -71,9 +71,9 @@
 
     <!-- Article Form Modal -->
     @if($showFormModal)
-    <div class="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6">
+    <div class="fixed inset-0 z-50 flex justify-end">
         <div class="absolute inset-0 bg-slate-900/40 dark:bg-slate-950/80 backdrop-blur-sm" wire:click="$set('showFormModal', false)"></div>
-        <div class="relative bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-2xl w-full max-w-4xl max-h-[85vh] flex flex-col overflow-hidden">
+        <div class="relative w-full md:w-3/4 lg:w-3/4 bg-white dark:bg-slate-900 shadow-2xl flex flex-col h-full animate-slide-in-right overflow-hidden border-l border-slate-200 dark:border-slate-800">
             <div class="px-6 py-4 border-b border-slate-200 dark:border-slate-800 flex justify-between items-center bg-slate-50 dark:bg-slate-900/50 shrink-0">
                 <h3 class="text-lg font-heading font-bold text-slate-900 dark:text-white">{{ $isEditMode ? 'Edit Artikel' : 'Tulis Artikel Baru' }}</h3>
                 <button wire:click="$set('showFormModal', false)" class="text-slate-400 hover:text-slate-600 dark:hover:text-white transition">
