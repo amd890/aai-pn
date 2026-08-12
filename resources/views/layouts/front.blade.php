@@ -1,5 +1,7 @@
 @php
-    $navMenus = \App\Domain\CMS\Models\Menu::where('is_active', true)->orderBy('order')->get()->groupBy('location');
+    $navMenus = Cache::remember('front:nav-menus', 3600, fn() =>
+        \App\Domain\CMS\Models\Menu::where('is_active', true)->orderBy('order')->get()->groupBy('location')
+    );
 @endphp
 <!DOCTYPE html>
 <html lang="id" class="scroll-smooth" x-data="{ darkMode: localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches) }" :class="{ 'dark': darkMode }" x-init="$watch('darkMode', val => localStorage.setItem('theme', val ? 'dark' : 'light'))">

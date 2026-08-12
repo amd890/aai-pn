@@ -3,6 +3,7 @@
 namespace App\Livewire\Admin\Content;
 
 use App\Domain\CMS\Models\Menu;
+use App\Domain\CMS\Services\CacheService;
 use Livewire\Component;
 use Livewire\Attributes\Layout;
 
@@ -109,11 +110,13 @@ class MenuManager extends Component
 
         $this->isModalOpen = false;
         $this->resetForm();
+        CacheService::flushMenus();
     }
 
     public function deleteMenu($id)
     {
         Menu::findOrFail($id)->delete();
+        CacheService::flushMenus();
     }
 
     public function moveUp($id)

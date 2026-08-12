@@ -10,13 +10,26 @@ use App\Domain\Event\Models\Event;
 use App\Http\Controllers\Controller;
 use App\Support\Enums\ArticleStatus;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Cache;
 
 class SitemapController extends Controller
 {
     /**
-     * Generate dynamic sitemap.xml
+     * Generate dynamic sitemap.xml (cached 1 hour)
      */
     public function sitemap(): Response
+    {
+        $xml = Cache::remember('front:sitemap-xml', 3600, function () {
+            return $this->buildSitemapXml();
+        });
+
+        return response($xml, 200)->header('Content-Type', 'application/xml');
+    }
+
+    /**
+     * Build sitemap XML content.
+     */
+    private function buildSitemapXml(): string
     {
         $baseUrl = rtrim(config('app.url'), '/');
 
@@ -113,7 +126,7 @@ class SitemapController extends Controller
 
         $xml .= '</urlset>';
 
-        return response($xml, 200)->header('Content-Type', 'application/xml');
+        return $xml;
     }
 
     /**

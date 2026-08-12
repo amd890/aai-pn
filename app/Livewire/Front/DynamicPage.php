@@ -3,6 +3,7 @@
 namespace App\Livewire\Front;
 
 use App\Domain\CMS\Models\Article;
+use Illuminate\Support\Facades\Cache;
 use Livewire\Component;
 
 class DynamicPage extends Component
@@ -13,10 +14,14 @@ class DynamicPage extends Component
     public function mount($slug)
     {
         $this->slug = $slug;
-        $this->page = Article::where('type', 'page')
-            ->where('slug', $this->slug)
-            ->where('status', 'published')
-            ->first();
+
+        // Cache halaman statis selama 1 jam
+        $this->page = Cache::remember("front:page:{$slug}", 3600, fn () =>
+            Article::where('type', 'page')
+                ->where('slug', $this->slug)
+                ->where('status', 'published')
+                ->first()
+        );
             
         if (!$this->page) {
             // Graceful fallback for pages not yet created in CMS

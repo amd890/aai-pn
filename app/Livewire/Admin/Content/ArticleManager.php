@@ -5,6 +5,7 @@ namespace App\Livewire\Admin\Content;
 use App\Domain\CMS\Models\Article;
 use App\Domain\CMS\Models\ArticleCategory;
 use App\Domain\CMS\Repositories\CmsRepository;
+use App\Domain\CMS\Services\CacheService;
 use App\Support\Enums\ArticleStatus;
 use App\Support\Enums\ArticleType;
 use Illuminate\Support\Str;
@@ -104,12 +105,18 @@ class ArticleManager extends Component
 
         $this->showFormModal = false;
         $this->resetForm();
+        CacheService::flushArticles($article->slug);
+        CacheService::flushSitemap();
     }
 
     public function delete(int $id)
     {
-        Article::findOrFail($id)->delete();
+        $article = Article::findOrFail($id);
+        $slug = $article->slug;
+        $article->delete();
         $this->noticeMessage = "Artikel dihapus!";
+        CacheService::flushArticles($slug);
+        CacheService::flushSitemap();
     }
 
     public function resetForm()
