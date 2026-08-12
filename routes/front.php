@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Front\ArticleController;
 use App\Http\Controllers\Front\HomeController;
+use App\Http\Controllers\Front\SitemapController;
 use App\Http\Controllers\Front\VerificationController;
 use Illuminate\Support\Facades\Route;
 
@@ -10,6 +11,10 @@ use Illuminate\Support\Facades\Route;
 | Front-end (Public) Routes
 |--------------------------------------------------------------------------
 */
+
+// SEO & AI Crawlers
+Route::get('/sitemap.xml', [SitemapController::class, 'sitemap'])->name('sitemap');
+Route::get('/llms.txt', [SitemapController::class, 'llmsTxt'])->name('llms-txt');
 
 Route::name('front.')->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -35,6 +40,7 @@ Route::name('front.')->group(function () {
     Route::get('/gallery', \App\Livewire\Front\DynamicPage::class)->defaults('slug', 'gallery')->name('gallery.index');
 
     // Static Pages
+    Route::get('/page/{slug}', \App\Livewire\Front\DynamicPage::class)->name('page.show');
     Route::get('/faq', \App\Livewire\Front\DynamicPage::class)->defaults('slug', 'faq')->name('faq');
     Route::get('/contact', \App\Livewire\Front\DynamicPage::class)->defaults('slug', 'contact')->name('contact');
     Route::get('/downloads', \App\Livewire\Front\DynamicPage::class)->defaults('slug', 'downloads')->name('downloads');

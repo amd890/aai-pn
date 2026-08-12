@@ -1,2 +1,37 @@
+# Asosiasi Arsiparis Indonesia (AAI) - Portal Nasional
+# https://aai.or.id
+
 User-agent: *
-Disallow:
+Allow: /
+Disallow: /admin/
+Disallow: /portal/
+Disallow: /login
+Disallow: /register
+Disallow: /logout
+
+# Sitemap
+Sitemap: https://aai.or.id/sitemap.xml
+
+# AI Crawlers & LLM Discovery
+# See: https://llmstxt.org
+User-agent: GPTBot
+Allow: /
+Allow: /llms.txt
+
+User-agent: ChatGPT-User
+Allow: /
+Allow: /llms.txt
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+Allow: /llms.txt
+
+User-agent: ClaudeBot
+Allow: /
+Allow: /llms.txt
+
+User-agent: Applebot-Extended
+Allow: /

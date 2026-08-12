@@ -115,8 +115,42 @@
                         </div>
 
                         <div>
+                            <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Tipe Tautan</label>
+                            <select wire:model.live="linkType" class="w-full rounded-lg border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 text-slate-900 dark:text-white focus:border-amber-500 focus:ring-amber-500 shadow-sm text-sm">
+                                <option value="custom">URL Kustom</option>
+                                <option value="page">Halaman (Page)</option>
+                                <option value="article">Artikel / Berita</option>
+                                <option value="category">Kategori Artikel</option>
+                            </select>
+                        </div>
+
+                        @if($linkType !== 'custom')
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Pilih Tujuan</label>
+                            <select wire:model.live="selectedItemId" class="w-full rounded-lg border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 text-slate-900 dark:text-white focus:border-amber-500 focus:ring-amber-500 shadow-sm text-sm">
+                                <option value="">-- Pilih --</option>
+                                @if($linkType === 'page')
+                                    @foreach($pages as $page)
+                                        <option value="{{ $page->id }}">{{ $page->title }}</option>
+                                    @endforeach
+                                @elseif($linkType === 'article')
+                                    @foreach($articles as $article)
+                                        <option value="{{ $article->id }}">{{ $article->title }}</option>
+                                    @endforeach
+                                @elseif($linkType === 'category')
+                                    @foreach($categories as $category)
+                                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                    @endforeach
+                                @endif
+                            </select>
+                        </div>
+                        @endif
+
+                        <div>
                             <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">URL Tujuan</label>
-                            <input type="text" wire:model="url" required class="w-full rounded-lg border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 text-slate-900 dark:text-white focus:border-amber-500 focus:ring-amber-500 shadow-sm text-sm font-mono" placeholder="Contoh: /about atau https://...">
+                            <input type="text" wire:model="url" required 
+                                @if($linkType !== 'custom') readonly @endif
+                                class="w-full rounded-lg border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 text-slate-900 dark:text-white focus:border-amber-500 focus:ring-amber-500 shadow-sm text-sm font-mono @if($linkType !== 'custom') bg-slate-100 dark:bg-slate-800 cursor-not-allowed @endif" placeholder="Contoh: /about atau https://...">
                             <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Gunakan path relatif (misal `/about`) untuk halaman internal.</p>
                             @error('url') <span class="text-red-500 text-xs mt-1 block">{{ $message }}</span> @enderror
                         </div>
