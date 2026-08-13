@@ -94,11 +94,17 @@
     </div>
 
     <!-- Modal Form Menu -->
-    @if($isModalOpen)
-    <div class="fixed inset-0 z-50 flex justify-start">
-        <div class="absolute inset-0 bg-slate-900/50 dark:bg-slate-950/80 backdrop-blur-sm" wire:click="$set('isModalOpen', false)"></div>
+    <div x-data="{ show: @entangle('isModalOpen') }" x-show="show" x-cloak class="fixed inset-0 z-50 flex justify-end">
+        <div x-show="show" x-transition.opacity.duration.300ms class="absolute inset-0 bg-slate-900/50 dark:bg-slate-950/80 backdrop-blur-sm" @click="show = false"></div>
         
-        <div class="relative w-full md:w-3/4 lg:w-3/4 bg-white dark:bg-slate-900 shadow-2xl flex flex-col h-full animate-slide-in-left overflow-hidden border-r border-slate-200 dark:border-slate-800">
+        <div x-show="show"
+             x-transition:enter="transition ease-out duration-300 transform"
+             x-transition:enter-start="translate-x-full"
+             x-transition:enter-end="translate-x-0"
+             x-transition:leave="transition ease-in duration-200 transform"
+             x-transition:leave-start="translate-x-0"
+             x-transition:leave-end="translate-x-full"
+             class="relative w-full md:w-3/4 lg:w-3/4 bg-white dark:bg-slate-900 shadow-2xl flex flex-col h-full overflow-hidden border-l border-slate-200 dark:border-slate-800">
                 
                 <form wire:submit.prevent="saveMenu">
                     <div class="px-6 py-5 bg-slate-50 dark:bg-slate-800/50 border-b border-slate-200 dark:border-slate-800">
@@ -144,7 +150,6 @@
                                 @endif
                             </select>
                         </div>
-                        @endif
 
                         <div>
                             <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">URL Tujuan</label>

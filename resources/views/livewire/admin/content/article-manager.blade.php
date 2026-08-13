@@ -70,10 +70,16 @@
     </div>
 
     <!-- Article Form Modal -->
-    @if($showFormModal)
-    <div class="fixed inset-0 z-50 flex justify-start">
-        <div class="absolute inset-0 bg-slate-900/40 dark:bg-slate-950/80 backdrop-blur-sm" wire:click="$set('showFormModal', false)"></div>
-        <div class="relative w-full md:w-3/4 lg:w-3/4 bg-white dark:bg-slate-900 shadow-2xl flex flex-col h-full animate-slide-in-left overflow-hidden border-r border-slate-200 dark:border-slate-800">
+    <div x-data="{ show: @entangle('showFormModal') }" x-show="show" x-cloak class="fixed inset-0 z-50 flex justify-end">
+        <div x-show="show" x-transition.opacity.duration.300ms class="absolute inset-0 bg-slate-900/40 dark:bg-slate-950/80 backdrop-blur-sm" @click="show = false"></div>
+        <div x-show="show"
+             x-transition:enter="transition ease-out duration-300 transform"
+             x-transition:enter-start="translate-x-full"
+             x-transition:enter-end="translate-x-0"
+             x-transition:leave="transition ease-in duration-200 transform"
+             x-transition:leave-start="translate-x-0"
+             x-transition:leave-end="translate-x-full"
+             class="relative w-full md:w-3/4 lg:w-3/4 bg-white dark:bg-slate-900 shadow-2xl flex flex-col h-full overflow-hidden border-l border-slate-200 dark:border-slate-800">
             <div class="px-6 py-4 border-b border-slate-200 dark:border-slate-800 flex justify-between items-center bg-slate-50 dark:bg-slate-900/50 shrink-0">
                 <h3 class="text-lg font-heading font-bold text-slate-900 dark:text-white">{{ $isEditMode ? 'Edit Artikel' : 'Tulis Artikel Baru' }}</h3>
                 <button wire:click="$set('showFormModal', false)" class="text-slate-400 hover:text-slate-600 dark:hover:text-white transition">
@@ -134,7 +140,6 @@
                                 </div>
                                 @if($cover_image)
                                     <p class="text-emerald-600 dark:text-emerald-400 text-xs mt-2 font-medium">✓ File terpilih: {{ $cover_image->getClientOriginalName() }}</p>
-                                @endif
                                 @error('cover_image') <span class="text-red-500 dark:text-red-400 text-xs">{{ $message }}</span> @enderror
                             </div>
                         </div>
