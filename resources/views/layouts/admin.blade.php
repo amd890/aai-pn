@@ -190,7 +190,7 @@
     </aside>
 
     <!-- Executive Content Area -->
-    <main class="flex-1 overflow-x-hidden p-6 sm:p-10 lg:p-12 relative z-10">
+    <main class="flex-1 overflow-x-hidden p-6 sm:p-10 lg:p-12">
         <header class="flex flex-col xl:flex-row xl:items-end justify-between gap-6 mb-10 pb-8 border-b border-slate-200 dark:border-slate-800/60 relative">
             <div class="absolute bottom-0 left-0 w-1/3 h-[1px] bg-gradient-to-r from-amber-500 to-transparent"></div>
             
@@ -217,20 +217,11 @@
         </header>
 
         <!-- Main Content Slot -->
-        <div class="animate-fade-in-up">
+        <div>
             {{ $slot }}
         </div>
     </main>
 
     @livewireScripts
-    <style>
-        .animate-fade-in-up {
-            animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-    </style>
 </body>
 </html>
