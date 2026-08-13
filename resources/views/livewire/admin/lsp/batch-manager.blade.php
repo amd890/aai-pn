@@ -107,6 +107,7 @@
                                     <div class="text-[10px] text-slate-500 mt-0.5">Tercetak Otomatis</div>
                                 @else
                                     <span class="text-xs text-slate-500 italic">Belum Diterbitkan</span>
+                                @endif
                             </td>
                             <td class="py-4 px-6 text-right space-x-2">
                                 @if(($p->status->value ?? $p->status) !== 'competent' && ($p->status->value ?? $p->status) !== 'not_competent')
