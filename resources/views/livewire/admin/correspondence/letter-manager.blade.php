@@ -63,9 +63,9 @@
 
     <!-- Modal Buat Surat Baru -->
     @if($showCreateModal)
-    <div class="fixed inset-0 z-50 flex justify-end">
+    <div class="fixed inset-0 z-50 flex justify-start">
         <div class="absolute inset-0 bg-slate-900/40 dark:bg-slate-950/80 backdrop-blur-sm" wire:click="$set('showCreateModal', false)"></div>
-        <div class="relative w-full md:w-3/4 lg:w-3/4 bg-white dark:bg-slate-900 shadow-2xl flex flex-col h-full animate-slide-in-right overflow-hidden border-l border-slate-200 dark:border-slate-800">
+        <div class="relative w-full md:w-3/4 lg:w-3/4 bg-white dark:bg-slate-900 shadow-2xl flex flex-col h-full animate-slide-in-left overflow-hidden border-r border-slate-200 dark:border-slate-800">
             <h3 class="font-heading font-black text-2xl text-slate-900 dark:text-white">Penerbitan Surat & Tata Naskah</h3>
             <p class="text-slate-500 dark:text-slate-400 text-xs">Penomeran surat otomatis menyesuaikan angka Romawi bulan dan tahun berjalan tanpa bentrok urutan.</p>
 
@@ -99,7 +99,7 @@
                               class="w-full px-4 py-2 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-xl text-xs text-slate-900 dark:text-white focus:outline-none focus:border-indigo-500"></textarea>
                 </div>
 
-                <div class="flex justify-end gap-3 pt-4">
+                <div class="flex justify-start gap-3 pt-4">
                     <button type="button" wire:click="$set('showCreateModal', false)" class="px-5 py-2.5 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 font-bold text-xs rounded-xl hover:bg-slate-200 dark:hover:bg-slate-700 transition">Batal</button>
                     <button type="submit" class="px-6 py-2.5 bg-indigo-500 hover:bg-indigo-400 text-white font-heading font-black text-xs rounded-xl shadow">Generate & Terbitkan Naskah &rarr;</button>
                 </div>
